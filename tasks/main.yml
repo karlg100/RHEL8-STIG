@@ -151,6 +151,8 @@
       ansible.builtin.debug:
         msg: "Warning!! changes have been made that require a reboot to be implemented but skip reboot was set - Can affect compliance check results"
       changed_when: true
+  tags:
+    - molecule-idempotence-notest
 
 - name: Run post remediation audit
   when: run_audit
@@ -169,6 +171,8 @@
         owner: root
         group: root
         mode: 'u=rwx,go=rx'
+      tags:
+        - molecule-idempotence-notest
 
     - name: Create ansible facts file
       ansible.builtin.template:
@@ -177,6 +181,8 @@
         owner: root
         group: root
         mode: 'u-x,go-wx'
+      tags:
+        - molecule-idempotence-notest
 
 - name: Fetch audit files
   when:
